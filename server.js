@@ -16,10 +16,6 @@ app.use((err, req, res, next) => {
     next();
 });
 
-// -----------------------------------------------------------------------------
-// 1. AUTENTICAÇÃO E USUÁRIOS
-// -----------------------------------------------------------------------------
-
 // POST /api/login - Autenticação no sistema
 app.post('/api/login', async (req, res) => {
     const email = req.body.email ? req.body.email.trim() : '';
@@ -81,9 +77,6 @@ app.post('/api/login', async (req, res) => {
     }
 });
 
-// -----------------------------------------------------------------------------
-// 2. CATÁLOGO DE PRODUTOS (BioCosmetics)
-// -----------------------------------------------------------------------------
 
 // GET /api/produtos - Listar catálogo
 app.get('/api/produtos', async (req, res) => {
@@ -151,12 +144,8 @@ app.delete('/api/produtos/:id', async (req, res) => {
     }
 });
 
-// -----------------------------------------------------------------------------
-// 3. CARRINHO DE COMPRAS
-// -----------------------------------------------------------------------------
 
 // GET /api/carrinho/:id_cliente - Visualizar carrinho com total
-// Listar itens do carrinho de um cliente
 app.get('/api/carrinho/:id_cliente', async (req, res) => {
     const { id_cliente } = req.params;
     let conn;
@@ -231,10 +220,6 @@ app.delete('/api/carrinho/:id_carrinho', async (req, res) => {
         if (conn) conn.release();
     }
 });
-
-// -----------------------------------------------------------------------------
-// 4. CHECKOUT E NOTA FISCAL
-// -----------------------------------------------------------------------------
 
 /// POST /api/finalizar-compra - Processa pedido, baixa estoque e gera Nota Fiscal
 app.post('/api/finalizar-compra', async (req, res) => {
@@ -319,7 +304,7 @@ app.post('/api/finalizar-compra', async (req, res) => {
         if (conn) conn.release();
     }
 });
-// Inicialização do Servidor
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Servidor BioCosmetics rodando em http://localhost:${PORT}`);

@@ -1,7 +1,18 @@
 CREATE DATABASE IF NOT EXISTS Projeto_integrador;
 USE Projeto_integrador;
 
--- 1. Tabela Cliente
+
+USE Projeto_integrador;
+
+INSERT INTO cliente (id_cliente, nome, cpf_cnpj, telefone) 
+VALUES (1, 'Maria Silva', '123.456.789-00', '11999998888')
+ON DUPLICATE KEY UPDATE nome='Maria Silva';
+
+INSERT INTO login (id_cliente, email, senha, ativo) 
+VALUES (1, 'cliente@biocosmetics.com', '123', TRUE)
+ON DUPLICATE KEY UPDATE senha='123', ativo=TRUE;
+
+
 CREATE TABLE cliente (
     id_cliente INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(150) NOT NULL,
@@ -10,7 +21,7 @@ CREATE TABLE cliente (
     data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
--- 2. Tabela Cadastro
+
 CREATE TABLE cadastro (
     id_cadastro INT AUTO_INCREMENT PRIMARY KEY,
     id_cliente INT NOT NULL UNIQUE,
@@ -25,7 +36,7 @@ CREATE TABLE cadastro (
         REFERENCES cliente(id_cliente) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
--- 3. Tabela Login
+
 CREATE TABLE login (
     id_login INT AUTO_INCREMENT PRIMARY KEY,
     id_cliente INT NOT NULL UNIQUE,
@@ -37,7 +48,7 @@ CREATE TABLE login (
         REFERENCES cliente(id_cliente) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
--- 4. Tabela Consulta
+
 CREATE TABLE consulta (
     id_consulta INT AUTO_INCREMENT PRIMARY KEY,
     id_cliente INT NOT NULL,
@@ -49,7 +60,7 @@ CREATE TABLE consulta (
         REFERENCES cliente(id_cliente) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
--- 5. Tabela Produto
+
 CREATE TABLE produto (
     id_produto INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(150) NOT NULL,
@@ -62,7 +73,7 @@ CREATE TABLE produto (
     data_cadastro DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
--- 6. Tabela Carrinho de Compra
+
 CREATE TABLE carrinho_de_compra (
     id_carrinho INT AUTO_INCREMENT PRIMARY KEY,
     id_cliente INT NOT NULL,
@@ -76,7 +87,7 @@ CREATE TABLE carrinho_de_compra (
     CONSTRAINT uk_cliente_produto UNIQUE (id_cliente, id_produto)
 );
 
--- 7. Tabela Compra
+
 CREATE TABLE compra (
     id_compra INT AUTO_INCREMENT PRIMARY KEY,
     id_cliente INT NOT NULL,
@@ -88,7 +99,7 @@ CREATE TABLE compra (
         REFERENCES cliente(id_cliente) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
--- 8. Tabela Nota Fiscal
+
 CREATE TABLE nota_fiscal (
     id_nota INT AUTO_INCREMENT PRIMARY KEY,
     id_compra INT NOT NULL UNIQUE,
