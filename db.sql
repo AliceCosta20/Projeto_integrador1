@@ -6,11 +6,11 @@ USE Projeto_integrador;
 
 INSERT INTO cliente (id_cliente, nome, cpf_cnpj, telefone) 
 VALUES (1, 'Maria Silva', '123.456.789-00', '11999998888')
-ON DUPLICATE KEY UPDATE nome='Maria Silva';
+
 
 INSERT INTO login (id_cliente, email, senha, ativo) 
 VALUES (1, 'cliente@biocosmetics.com', '123', TRUE)
-ON DUPLICATE KEY UPDATE senha='123', ativo=TRUE;
+
 
 
 CREATE TABLE cliente (

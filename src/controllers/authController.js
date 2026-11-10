@@ -1,8 +1,8 @@
-const AuthModel = require('../models/authModel');
+const AuthModel = require('../models/authModel'); //Importa as funções da camada de banco de dados (AuthModel), como buscar o utilizador por e-mail e atualizar o acesso.
 
 const authController = {
     login: async (req, res) => {
-        const email = req.body.email ? req.body.email.trim() : '';
+        const email = req.body.email ? req.body.email.trim() : ''; // Extrai o email env
         const senha = req.body.senha ? req.body.senha.trim() : '';
 
         console.log("--- TENTATIVA DE LOGIN ---");
